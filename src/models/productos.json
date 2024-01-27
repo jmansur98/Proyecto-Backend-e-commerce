@@ -1,0 +1,104 @@
+[
+    {
+      "id": 1,
+      "title": "Arroz",
+      "description": "Arroz blanco de grano largo",
+      "code": "ARZ001",
+      "price": 2.99,
+      "status": true,
+      "stock": 100,
+      "category": "Granos"
+    },
+    {
+      "id": 2,
+      "title": "Leche",
+      "description": "Leche entera pasteurizada",
+      "code": "LCH002",
+      "price": 1.99,
+      "status": true,
+      "stock": 50,
+      "category": "Lácteos"
+    },
+    {
+      "id": 3,
+      "title": "Pan",
+      "description": "Pan integral",
+      "code": "PN003",
+      "price": 3.49,
+      "status": true,
+      "stock": 75,
+      "category": "Panadería"
+    },
+    {
+      "id": 4,
+      "title": "Huevos",
+      "description": "Docena de huevos grandes",
+      "code": "HVG004",
+      "price": 4.99,
+      "status": true,
+      "stock": 30,
+      "category": "Huevos y lácteos"
+    },
+    {
+      "id": 5,
+      "title": "Pasta",
+      "description": "Pasta de trigo durum",
+      "code": "PST005",
+      "price": 1.79,
+      "status": true,
+      "stock": 80,
+      "category": "Pasta y arroz"
+    },
+    {
+      "id": 6,
+      "title": "Manzanas",
+      "description": "Manzanas rojas",
+      "code": "MAN006",
+      "price": 0.89,
+      "status": true,
+      "stock": 120,
+      "category": "Frutas"
+    },
+    {
+      "id": 7,
+      "title": "Pollo",
+      "description": "Pechuga de pollo sin hueso",
+      "code": "PLL007",
+      "price": 6.99,
+      "status": true,
+      "stock": 40,
+      "category": "Carnes"
+    },
+    {
+      "id": 8,
+      "title": "Queso",
+      "description": "Queso cheddar",
+      "code": "QSO008",
+      "price": 5.49,
+      "status": true,
+      "stock": 25,
+      "category": "Lácteos"
+    },
+    {
+      "id": 9,
+      "title": "Cereal",
+      "description": "Cereal de maíz con azúcar",
+      "code": "CRL009",
+      "price": 3.29,
+      "status": true,
+      "stock": 60,
+      "category": "Desayuno"
+    },
+    {
+      "id": 10,
+      "title": "Aceite de oliva",
+      "description": "Aceite de oliva virgen extra",
+      "code": "ACO010",
+      "price": 8.99,
+      "status": true,
+      "stock": 20,
+      "category": "Aceites y condimentos"
+    }
+  ]
+  
+  

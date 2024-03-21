@@ -1,5 +1,6 @@
 const ProductModel = require("../models/product.model");
 
+
 class ProductManager {
     async addProduct({title,description,price,img,code,stock,category,thumbnail}){
         try{
@@ -34,18 +35,29 @@ class ProductManager {
         }
     }
 
-    async getProducts(){
+    async getProducts(sort) {
         try {
-            const products = await ProductModel.find();
+            const products = await ProductModel.find().sort({ price: sort });
             return products;
         } catch (error) {
             console.log("Error al obtener productos");
             throw error;
-            
         }
     }
+    
+    async getProductsByQuery(query, sort) {
+        try {
+            const products = await ProductModel.find({ category: query }).sort({ price: sort });
+            return products;
+        } catch (error) {
+            console.log("Error al obtener productos por consulta", error);
+            throw error;
+        }
+    }
+
     async getProductById(id) {
         try {
+            
             const producto = await ProductModel.findById(id);
             if(!producto) {
                 console.log("Producto no encontrado.");

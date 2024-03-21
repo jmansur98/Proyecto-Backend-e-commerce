@@ -25,6 +25,11 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
 
+// Ruta para renderizar product.handlebars
+app.get("/product", (req, res) => {
+    res.render("product");
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en puerto https://localhost:${PORT}`);    
 });

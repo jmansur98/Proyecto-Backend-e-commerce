@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const exphbs = require("express-handlebars");
 const socket = require("socket.io");
-const PORT = 8080;
+const PUERTO = 8080;
 require("./database.js")
 
 const productsRouter = require("./routes/products.router.js");
@@ -15,21 +15,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("./src/public"));
 
-//Handlebars
+//handlebars
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
-//Rutas: 
+//rutas
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/", viewsRouter);
 
-// Ruta para renderizar product.handlebars
 app.get("/product", (req, res) => {
     res.render("product");
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en puerto https://localhost:${PORT}`);    
+app.listen(PUERTO, () => {
+    console.log(`Servidor escuchando en puerto https://localhost:${PUERTO}`);    
 });

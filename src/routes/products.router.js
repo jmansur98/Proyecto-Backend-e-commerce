@@ -5,21 +5,21 @@ const ProductManager = require("../controllers/product-manager.db.js");
 const router = require("./views.router");
 const productManager = new ProductManager();
 
-router.get('/favicon.ico', (req, res) => res.status(204).end());
+router.get("/favicon.ico", (req, res) => res.status(204).end());
 
-//Obtener todos los productos
+// todos los productos
 router.get("/", async (req, res) => {
     try {
-        const limit = parseInt(req.query.limit) || 3; // Limitar a 3 productos por página
-        const page = parseInt(req.query.page) || 1; // Página predeterminada: 1
-        const sort = req.query.sort === 'desc' ? -1 : 1; // Orden predeterminado: ascendente
-        const query = req.query.query || ''; // Búsqueda general
+        const limit = parseInt(req.query.limit) || 3; // 3 prod. por página
+        const page = parseInt(req.query.page) || 1; // page predeterminada 1
+        const sort = req.query.sort === "desc" ? -1 : 1; // orden ascendente
+        const query = req.query.query || ''; // búsqueda general
 
-        // Calcular el índice de inicio según la página solicitada
         const startIndex = (page - 1) * limit;
 
         let products;
         let totalProducts;
+
         if (query) {
             products = await productManager.getProductsByQuery(query, sort);
             totalProducts = products.length;
@@ -36,9 +36,9 @@ router.get("/", async (req, res) => {
         const prevPage = hasPrevPage ? page - 1 : null;
         const nextPage = hasNextPage ? page + 1 : null;
 
-        // Construir objeto de respuesta con información de paginación
+        //objeto de respuesta con información de pagination
         const response = {
-            status: 'success',
+            status: "success",
             payload: products,
             totalPages,
             prevPage,
@@ -46,11 +46,11 @@ router.get("/", async (req, res) => {
             page,
             hasPrevPage,
             hasNextPage,
-            prevLink: hasPrevPage ? `/api/products?page=${prevPage}` : null,
-            nextLink: hasNextPage ? `/api/products?page=${nextPage}` : null
+            prevLink: hasPrevPage ? "/api/products?page=${prevPage}" : null,
+            nextLink: hasNextPage ? "/api/products?page=${nextPage}" : null
         };
         
-        // Renderizar la vista de productos con la información paginada
+        //renderizar la vista de productos con toda la info. 
         res.render("products", {
             pageTitle: "Productos",
             productos: products.map(product => ({
@@ -61,7 +61,6 @@ router.get("/", async (req, res) => {
                 status: product.status,
                 stock: product.stock,
                 category: product.category,
-                // Agrega aquí los atributos adicionales si es necesario
             })),
             hasPrevPage,
             hasNextPage,

@@ -1,5 +1,7 @@
 const express = require("express");
 const routes = express.Router();
+const mongoose = require("mongoose");
+
 
 const ProductManager = require("../controllers/product-manager.db.js");
 const router = require("./views.router");
@@ -8,7 +10,7 @@ const productManager = new ProductManager();
 router.get("/favicon.ico", (req, res) => res.status(204).end());
 
 // todos los productos
-router.get("/", async (req, res) => {
+router.get("/api/products", async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 3; // 3 prod. por página
         const page = parseInt(req.query.page) || 1; // page predeterminada 1
@@ -79,25 +81,29 @@ router.get("/", async (req, res) => {
 //Obtener producto por id
 router.get("/:pid", async (req, res) => {
     const id = req.params.pid;
-
+  
     try {
-        const producto = await productManager.getProductById(id); 
-        if (!producto) {
-            return res.json({
-                error: "Producto no encontrado"
-            });
-        }
-
-        res.json(producto);
-    } catch (error) {
-        console.error("Error al obtener producto", error);
-        res.status(500).json({
-            error: "Error interno del servidor"
+      /// Comprobar si id es un ObjectId válido antes de pasarlo a getProductById
+      if (!mongoose.Types.ObjectId.isValid(id) || id.length !== 24) {
+        return res.status(400).json({ error: "Invalid product ID" });
+      }
+  
+      const producto = await productManager.getProductById(id); 
+      if (!producto) {
+        return res.json({
+          error: "Producto no encontrado"
         });
+      }
+  
+      res.json(producto);
+    } catch (error) {
+      console.error("Error al obtener producto", error);
+      res.status(500).json({
+        error: "Error interno del servidor"
+      });
     }
-});
-
-
+  });
+  
 
 //Agregar producto
 router.post("/", async (req, res) => {

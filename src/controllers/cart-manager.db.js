@@ -40,7 +40,6 @@ class CartManager {
             }else {
                 carrito.products.push({product: productId, quantity});
             }
-            //Marca el documento como modificado para que se guarde en la base de datos.
             carrito.markModified("products");
 
             await carrito.save();

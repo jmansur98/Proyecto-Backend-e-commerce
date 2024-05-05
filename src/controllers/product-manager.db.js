@@ -1,4 +1,5 @@
 const ProductModel = require("../models/product.model");
+const mongoose = require("mongoose"); 
 
 
 class ProductManager {
@@ -56,6 +57,7 @@ class ProductManager {
     }
 
     async getProductById(id) {
+          
         try {
             
             const producto = await ProductModel.findById(id);

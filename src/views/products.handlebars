@@ -1,17 +1,20 @@
-<h1>Productos</h1>
-
-<ul>
-        {{#each productos}}
-            <li>{{this.title}} 
-                - Descripción: {{this.description}}</li>
-        {{/each}}
-    </ul>
-    <div>
-        <p>Página {{currentPage}} de {{totalPages}}</p>
-{{#if hasPrevPage}}
-    <a href="/api/products?page={{prevPage}}"> anterior </a>
-{{/if}}
-{{#if hasNextPage}}
-    <a href="/api/products?page={{nextPage}}"> siguiente </a>
-{{/if}}
-    </div>
+<div class="products-container">
+  <h1>Productos</h1>
+  <ul class="products-list">
+    {{#each productos}}
+      <li class="product-item">
+        <h3 class="product-title">{{this.title}}</h3>
+        Descripción: {{this.description}}
+      </li>
+    {{/each}}
+  </ul>
+  <div class="pagination">
+    <p>Página {{currentPage}} de {{totalPages}}</p>
+    {{#if hasPrevPage}}
+      <a href="/api/products?page={{prevPage}}" class="prev-link">Anterior</a>
+    {{/if}}
+    {{#if hasNextPage}}
+      <a href="/api/products?page={{nextPage}}" class="next-link">Siguiente</a>
+    {{/if}}
+  </div>
+</div>

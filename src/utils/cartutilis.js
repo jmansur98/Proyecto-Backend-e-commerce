@@ -1,4 +1,3 @@
-// Función para generar un código único para el ticket
 const generateUniqueCode = () => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const codeLength = 8;
@@ -13,7 +12,6 @@ const generateUniqueCode = () => {
     return code + '-' + timestamp;
 }
 
-// Función para calcular el total de la compra
 const calcularTotal = (products) => {
     let total = 0;
 

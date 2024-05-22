@@ -6,14 +6,14 @@ const cartController = new CartController();
 
 router.use(authMiddleware);
 
-
-router.post("/", cartController.nuevocarrito); //creamos un nuevo carrito
-router.get("/:cid", cartController.obtenerProductosDeCarrito); //listamos los productos que pertenecen a determinado carrito. 
-router.post("/:cid/product/:pid", cartController.agregarProductoEnCarrito); // Agregar productos a distintos carritos.
-router.delete("/:cid/product/:pid", cartController.eliminarProductoDeCarrito);
-router.put("/:cid", cartController.actualizarProductoEnCarrito); //actualizamos el PRODUCTO carrito.
-router.put("/:cid/product/:pid", cartController.actualizarCantidades); //actualizamos la CANTIDAD del PRODUCTO carrito.
-router.delete("/:cid", cartController.vaciarCarrito); //vaciamos el carrito.
+router.post("/", cartController.nuevocarrito);
+router.get("/:cid", cartController.obtenerProductosDeCarrito);
+router.post("/:cid/product/:pid", cartController.agregarProductoEnCarrito);
+router.delete('/:cid/product/:pid', cartController.eliminarProductoDeCarrito);
+router.put('/:cid', cartController.actualizarProductoEnCarrito);
+router.put('/:cid/product/:pid', cartController.actualizarCantidades);
+router.delete('/:cid', cartController.vaciarCarrito);
 router.post('/:cid/purchase', cartController.finalizarCompra);
+
 
 module.exports = router;

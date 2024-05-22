@@ -6,42 +6,35 @@ class ViewsController {
     async renderProducts(req, res) {
         try {
             const { page = 1, limit = 3 } = req.query;
-
             const skip = (page - 1) * limit;
-
+    
             const productos = await ProductModel
                 .find()
                 .skip(skip)
                 .limit(limit);
-
+    
             const totalProducts = await ProductModel.countDocuments();
-
             const totalPages = Math.ceil(totalProducts / limit);
-
             const hasPrevPage = page > 1;
             const hasNextPage = page < totalPages;
-
-
+    
             const nuevoArray = productos.map(producto => {
                 const { _id, ...rest } = producto.toObject();
-                return { id: _id, ...rest }; // Agregar el ID al objeto
+                return { id: _id, ...rest };
             });
-
-
-            const cartId = req.user.cart.toString();
-            //console.log(cartId);
-
+    
+            const cartId = req.user && req.user.cart ? req.user.cart.toString() : null;
+    
             res.render("products", {
                 productos: nuevoArray,
                 hasPrevPage,
                 hasNextPage,
-                prevPage: page > 1 ? parseInt(page) - 1 : null,
-                nextPage: page < totalPages ? parseInt(page) + 1 : null,
+                prevPage: hasPrevPage ? parseInt(page) - 1 : null,
+                nextPage: hasNextPage ? parseInt(page) + 1 : null,
                 currentPage: parseInt(page),
                 totalPages,
-                cartId
+                cartId,
             });
-
         } catch (error) {
             console.error("Error al obtener productos", error);
             res.status(500).json({
@@ -50,6 +43,7 @@ class ViewsController {
             });
         }
     }
+    
 
     async renderCart(req, res) {
         const cartId = req.params.cid;
@@ -110,6 +104,18 @@ class ViewsController {
     async renderHome(req, res) {
         res.render("home");
     }
+    async renderResetPassword(req, res) {
+        res.render("passwordreset");
+    }
+
+    async renderCambioPassword(req, res) {
+        res.render("passwordcambio");
+    }
+
+    async renderConfirmacion(req, res) {
+        res.render("confirmacion-envio");
+    }
+
 }
 
 module.exports = ViewsController;

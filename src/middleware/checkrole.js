@@ -4,16 +4,15 @@ const checkUserRole = (allowedRoles) => (req, res, next) => {
     const token = req.cookies.coderCookieToken;
 
     if (token) {
-        jwt.verify(token, 'proyectTest', (err, decoded) => {
+        jwt.verify(token, 'tokenProyect', (err, decoded) => {
             if (err) {
-                res.status(403).send('Acceso denegado. Token inválido.');
+                return res.status(403).send('Acceso denegado. Token inválido.');
+            }
+            const userRole = decoded.user.role;
+            if (allowedRoles.includes(userRole)) {
+                next();
             } else {
-                const userRole = decoded.user.role;
-                if (allowedRoles.includes(userRole)) {
-                    next();
-                } else {
-                    res.status(403).send('Acceso denegado. No tienes permiso para acceder a esta página.');
-                }
+                res.status(403).send('Acceso denegado. No tienes permiso para acceder a esta página.');
             }
         });
     } else {

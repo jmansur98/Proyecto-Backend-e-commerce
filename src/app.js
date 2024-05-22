@@ -1,35 +1,27 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const app = express();
 const exphbs = require("express-handlebars");
-require("./database.js");
-const initializePassport = require("./config/passport.config.js");
+const cookieParser = require("cookie-parser");
 const passport = require("passport");
+const initializePassport = require("./config/passport.config.js");
 const cors = require("cors");
 const path = require('path');
 const PUERTO = 8080;
-
-
+require("./database.js");
 
 const productsRouter = require("./routes/products.router.js");
 const cartsRouter = require("./routes/cart.router.js");
 const viewsRouter = require("./routes/views.router.js");
 const userRouter = require("./routes/user.router.js");
 
-// handlebars
-app.engine("handlebars", exphbs.engine());
-app.set("view engine", "handlebars");
-app.set("views","./src/views");
-
-// middleware
-app.use(express.static("./src/public"));
+//Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+//app.use(express.static("./src/public"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-
-// passport
+//Passport 
 app.use(passport.initialize());
 initializePassport();
 app.use(cookieParser());
@@ -39,20 +31,22 @@ const authMiddleware = require("./middleware/authmiddleware.js");
 app.use(authMiddleware);
 
 
-// rutas
+//Handlebars
+app.engine("handlebars", exphbs.engine());
+app.set("view engine", "handlebars");
+app.set("views", "./src/views");
+
+
+//Rutas: 
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
 app.use("/", viewsRouter);
 
-//  ruta raíz
-app.get("/", (req, res) => {
-  res.render("login");
+const httpServer = app.listen(PUERTO, () => {
+    console.log(`Servidor escuchando en el puerto ${PUERTO}`);
 });
 
-const httpServer = app.listen(PUERTO, () => {
-  console.log(`Servidor escuchando en el puerto http://localhost:${PUERTO}`);
-});
 ///Websockets: 
 const SocketManager = require("./sockets/socketmanager.js");
 new SocketManager(httpServer);

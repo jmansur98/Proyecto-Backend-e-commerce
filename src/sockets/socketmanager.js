@@ -22,6 +22,7 @@ class SocketManager {
 
             socket.on("agregarProducto", async (producto) => {
                 await productRepository.agregarProducto(producto);
+                console.log(producto);
                 this.emitUpdatedProducts(socket);
             });
 
@@ -39,3 +40,4 @@ class SocketManager {
 }
 
 module.exports = SocketManager;
+

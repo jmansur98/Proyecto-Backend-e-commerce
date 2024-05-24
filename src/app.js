@@ -17,7 +17,6 @@ const userRouter = require("./routes/user.router.js");
 //Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//app.use(express.static("./src/public"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
@@ -42,6 +41,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
 app.use("/", viewsRouter);
+
 
 const httpServer = app.listen(PUERTO, () => {
     console.log(`Servidor escuchando en el puerto ${PUERTO}`);

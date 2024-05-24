@@ -31,7 +31,7 @@ class ViewsController {
                 hasNextPage,
                 prevPage: hasPrevPage ? parseInt(page) - 1 : null,
                 nextPage: hasNextPage ? parseInt(page) + 1 : null,
-                currentPage: parseInt(page),
+                currentPage: parseInt(page),    
                 totalPages,
                 cartId,
             });
@@ -73,14 +73,14 @@ class ViewsController {
                 };
             });
 
-            res.render("carts", { productos: productosEnCarrito, totalCompra, cartId });
+            res.render("cart", { productos: productosEnCarrito, totalCompra, cartId });
         } catch (error) {
             console.error("Error al obtener el carrito", error);
-            res.status(500).json({ error: "Error interno del servidor" });
+            res.status(500).json({ error: "Error interno del servidor. es acaaaaaaaaaaaaaaaa" });
         }
     }
 
-    async renderLogin(req, res) {
+    async renderLogin(req, res) {    
         res.render("login");
     }
 

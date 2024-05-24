@@ -34,7 +34,6 @@ const eliminarProducto = (id) =>  {
     socket.emit("eliminarProducto", id);
 }
 
-//Agregamos productos del formulario: 
 
 document.getElementById("btnEnviar").addEventListener("click", () => {
     agregarProducto();

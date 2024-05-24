@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     category: {
-        type: String,
+        type: String, 
         required: true
     },
     status: {
@@ -46,6 +46,6 @@ const productSchema = new mongoose.Schema({
 
 productSchema.plugin(mongoosePaginate);
 
-const ProductModel = mongoose.model("product", productSchema);
+const ProductModel = mongoose.model("products", productSchema);
 
-module.exports = ProductModel;
+module.exports = ProductModel; 

@@ -11,11 +11,11 @@ class EmailManager {
             }
         });
     }
-
+   
     async enviarCorreoCompra(email, first_name, ticket) {
         try {
             const mailOptions = {
-                from: "Coder Test <coderhouse50015@gmail.com>",
+                from: "Mixer SuperMarket <coderhouse50015@gmail.com>",
                 to: email,
                 subject: 'Confirmación de compra',
                 html: `
@@ -29,9 +29,9 @@ class EmailManager {
         } catch (error) {
             console.error('Error al enviar el correo electrónico:', error);
         }
-    }
-
-    async enviarCorreoRestablecimiento(email, first_name, token) {
+    }  
+   
+      async enviarCorreoRestablecimiento(email, first_name, token) {
         try {
             const mailOptions = {
                 from: 'coderhouse50015@gmail.com',

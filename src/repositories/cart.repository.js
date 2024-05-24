@@ -1,4 +1,5 @@
 const CartModel = require("../models/cart.model.js");
+const ProductModel = require("../models/product.model.js");
 
 class CartRepository {
     async crearCarrito() {
@@ -15,22 +16,23 @@ class CartRepository {
         try {
             const carrito = await CartModel.findById(idCarrito);
             if (!carrito) {
-                console.log("No existe ese carrito con el id");
+                console.log("No existe ese carrito con el id:", idCarrito); 
                 return null;
             }
             return carrito;
         } catch (error) {
+            console.error("Error al obtener el carrito:", error); 
             throw new Error("Error");
         }
-    }
+    } 
 
     async agregarProducto(cartId, productId, quantity = 1) {
         try {
             const carrito = await this.obtenerProductosDeCarrito(cartId);
-            const existeProducto = carrito.products.find(item => item.product._id.toString() === productId);
+            const existeProducto = carrito.products.find(item => item.product.toString() === productId);
 
-            if (existeProducto) {
-                existeProducto.quantity += quantity;
+            if (existeProducto) {   
+                existeProducto.quantity += quantity; 
             } else {
                 carrito.products.push({ product: productId, quantity });
             }
@@ -41,9 +43,8 @@ class CartRepository {
             return carrito;
         } catch (error) {
             throw new Error("Error");
-        }
+        }          
     }
-
     async eliminarProducto(cartId, productId) {
         try {
             const cart = await CartModel.findById(cartId);
@@ -56,7 +57,7 @@ class CartRepository {
         } catch (error) {
             throw new Error("Error");
         }
-    }
+    } 
 
     async actualizarProductosEnCarrito(cartId, updatedProducts) {
         try {

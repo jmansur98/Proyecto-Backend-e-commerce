@@ -42,7 +42,7 @@ class ProductController {
     }
 
     async updateProduct(req, res) {
-        try {
+        try { 
             const id = req.params.pid;
             const productoActualizado = req.body;
 

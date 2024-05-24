@@ -21,9 +21,6 @@
     <button type="submit" class="btn btn-success">Finalizar Compra</button>
 </form>
 
-
-
-{{!-- Organizar en un módulo en PUBLIC/JS --}}
 <script>
     function eliminarProducto(cartId, productId) {
         fetch(`/api/carts/${cartId}/product/${productId}`, {

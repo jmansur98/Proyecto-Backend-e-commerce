@@ -1,0 +1,209 @@
+
+body {
+    font-family: sans-serif;
+
+}
+
+/*HEADER*/
+
+.tamLogo {
+    width: 300px;
+}
+
+.fuentesNav {
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+.encabezado {
+    /* background-color: bisque; */
+    border-top: solid 20px #f9af23;
+    /* border-bottom: solid 1px #c1101a; */
+    margin-bottom: 30px;
+}
+
+nav li a {
+    text-transform: uppercase;
+    text-decoration: none;
+    margin: 15px;
+    color: gray;
+    border-left: 1px solid #0808087c;
+    border-right: 1px solid #0808087c;
+    padding: 0 15px;
+}
+
+a:hover {
+    background-color: #f9af23;
+    color: #fafafa;
+}
+
+/* PRODUCTOS */
+
+.tituloProductos {
+    background-color: #f9af23;
+    color: #fafafa;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 20px;
+}
+
+.tituloProductos h2 {
+    font-size: 35px;
+}
+
+
+/*CARDS*/
+
+
+.colorBtn {
+    background-color: #f9af23;
+    color: #fafafa;
+    font-size: 18px;
+}
+
+.colorBtn:hover {
+    background-color: f9af23;
+    color: #fafafa;
+}
+
+
+/*Cards*/
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Estilos del formulario de inicio de sesión */
+h1 {
+    text-align: center;
+}
+
+.formulario {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.inputTest {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/*profile*/
+body {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#carouselExample {
+    width: 800px; 
+    height: 400px; 
+    margin: 0 auto; 
+    bottom: 120px;
+  }
+  
+  #carouselExample .carousel-item img {
+    transition: transform 0.7s ease-in-out; 
+  }
+  
+  #carouselExample .carousel-item:hover img {
+    transform: scale(1.1); 
+  }
+  
+.profile-container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.profile-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 400px;
+    margin: auto;
+    animation: fadeInUp 1s ease-out;
+}
+
+.profile-card p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.btn {
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background-color: #f9af23;
+    transform: scale(1.05);
+}
+
+.btn-logout {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-logout:hover {
+    background-color: #f9af23;
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+i {
+    font-size: 35px;
+}

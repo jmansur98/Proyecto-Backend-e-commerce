@@ -1,6 +1,5 @@
 const TicketModel = require("../models/ticket.model.js");
 const UserModel = require("../models/user.model.js");
-const CartModel = require("../models/cart.model.js");
 const CartRepository = require("../repositories/cart.repository.js");
 const cartRepository = new CartRepository();
 const ProductRepository = require("../repositories/product.repository.js");
@@ -41,25 +40,22 @@ class CartController {
         const productId = req.params.pid;
         const quantity = req.body.quantity || 1;   
         try {
-            //Tercer Integradora: 
-            // Buscar el producto para verificar el propietario
             const producto = await productRepository.obtenerProductoPorId(productId);
 
             if (!producto) {
                 return res.status(404).json({ message: 'Producto no encontrado' });
             }
 
-            // Verificar si el usuario es premium y si es propietario del producto
             if (req.user.role === 'premium' && producto.owner === req.user.email) {
                 return res.status(403).json({ message: 'No puedes agregar tu propio producto al carrito.' });
             }
-            ////////////////////////////////////////////////////////////////////
             await cartRepository.agregarProducto(cartId, productId, quantity);
             const carritoID = (req.user.cart).toString();
 
             res.redirect(`/carts/${carritoID}`)
         } catch (error) {
-            res.status(500).send("Error");
+            console.error("Error al agregar el producto al carrito:", error); 
+            res.status(500).send("Error al agregar el producto al carrito"); 
         }
     }
 
@@ -169,12 +165,11 @@ class CartController {
                 numTicket: ticket._id
             });
         } catch (error) {
-            console.error('Error al procesar la compra:', error);
-            res.status(500).json({ error: 'Error interno del servidor' });
+            console.error('Error al procesar la compra:', error); 
+            res.status(500).json({ error: 'Error al procesar la compra' }); 
         }
     }
-
 }
 
-
-module.exports = CartController;
+    
+module.exports = CartController;   

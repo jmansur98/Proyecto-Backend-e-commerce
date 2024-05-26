@@ -6,8 +6,8 @@ class EmailManager {
             service: 'gmail',
             port: 587,
             auth: {
-                user: "coderhouse50015@gmail.com",
-                pass: "norp renb afxw uxyq"
+                user: "ecommerceproyectbackend@gmail.com",
+                pass: "o t p c y x w r k v x y m p i q"
             }
         });
     }
@@ -15,7 +15,7 @@ class EmailManager {
     async enviarCorreoCompra(email, first_name, ticket) {
         try {
             const mailOptions = {
-                from: "Mixer SuperMarket <coderhouse50015@gmail.com>",
+                from: "Mixer SuperMarket <ecommerceproyectbackend@gmail.com>",
                 to: email,
                 subject: 'Confirmación de compra',
                 html: `
@@ -34,7 +34,7 @@ class EmailManager {
       async enviarCorreoRestablecimiento(email, first_name, token) {
         try {
             const mailOptions = {
-                from: 'coderhouse50015@gmail.com',
+                from: 'ecommerceproyectbackend@gmail.com',
                 to: email,
                 subject: 'Restablecimiento de Contraseña',
                 html: `

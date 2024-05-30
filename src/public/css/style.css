@@ -1,11 +1,8 @@
-
 body {
     font-family: sans-serif;
-
 }
 
-/*HEADER*/
-
+/* HEADER */
 .tamLogo {
     width: 300px;
 }
@@ -16,9 +13,7 @@ body {
 }
 
 .encabezado {
-    /* background-color: bisque; */
     border-top: solid 20px #f9af23;
-    /* border-bottom: solid 1px #c1101a; */
     margin-bottom: 30px;
 }
 
@@ -38,7 +33,6 @@ a:hover {
 }
 
 /* PRODUCTOS */
-
 .tituloProductos {
     background-color: #f9af23;
     color: #fafafa;
@@ -52,10 +46,7 @@ a:hover {
     font-size: 35px;
 }
 
-
-/*CARDS*/
-
-
+/* CARDS */
 .colorBtn {
     background-color: #f9af23;
     color: #fafafa;
@@ -66,9 +57,6 @@ a:hover {
     background-color: f9af23;
     color: #fafafa;
 }
-
-
-/*Cards*/
 
 .card-img-top {
     height: 200px;
@@ -105,7 +93,7 @@ label {
     box-sizing: border-box;
 }
 
-/*profile*/
+/* profile */
 body {
     background-color: #f8f9fa;
     font-family: 'Roboto', sans-serif;
@@ -118,21 +106,22 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 #carouselExample {
-    width: 800px; 
-    height: 400px; 
-    margin: 0 auto; 
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
     bottom: 120px;
-  }
-  
-  #carouselExample .carousel-item img {
-    transition: transform 0.7s ease-in-out; 
-  }
-  
-  #carouselExample .carousel-item:hover img {
-    transform: scale(1.1); 
-  }
-  
+}
+
+#carouselExample .carousel-item img {
+    transition: transform 0.7s ease-in-out;
+}
+
+#carouselExample .carousel-item:hover img {
+    transform: scale(1.1);
+}
+
 .profile-container {
     text-align: center;
 }
@@ -203,7 +192,82 @@ h1 {
     }
 }
 
-
 i {
     font-size: 35px;
+}
+
+/* Real Time Products Section */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.user-info h3 {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+.product-list {
+    margin-bottom: 30px;
+}
+
+.product-form {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.product-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#btnEnviar {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btnEnviar:hover {
+    background-color: #0056b3;
 }

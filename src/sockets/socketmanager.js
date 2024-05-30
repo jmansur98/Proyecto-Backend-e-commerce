@@ -11,7 +11,7 @@ class SocketManager {
 
     async initSocketEvents() {
         this.io.on("connection", async (socket) => {
-            console.log("Un cliente se conectó");
+            console.log("Administrativo conectado.");
             
             socket.emit("productos", await productRepository.obtenerProductos() );
 

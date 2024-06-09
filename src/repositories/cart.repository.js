@@ -51,7 +51,7 @@ class CartRepository {
             if (!cart) {
                 throw new Error('Carrito no encontrado');
             }
-            cart.products = cart.products.filter(item => item.product._id.toString() !== productId);
+            cart.products = cart.products.filter(item => item.product.toString() !== productId);
             await cart.save();
             return cart;
         } catch (error) {

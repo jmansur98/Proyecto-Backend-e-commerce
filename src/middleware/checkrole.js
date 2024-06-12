@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const checkUserRole = (allowedRoles) => (req, res, next) => {
-    const token = req.cookies.coderCookieToken;
+    const token = req.cookies.CookieProyectTest;
 
     if (token) {
         jwt.verify(token, 'tokenProyect', (err, decoded) => {

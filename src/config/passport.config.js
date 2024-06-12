@@ -24,7 +24,7 @@ const initializePassport = () => {
 const cookieExtractor = (req) => {
     let token = null;
     if (req && req.cookies) {
-        token = req.cookies["coderCookieToken"];
+        token = req.cookies["CookieProyectTest"];
     }
    // console.log("Extracted token: ", token);   Agrega este log para verificar el token
     return token;

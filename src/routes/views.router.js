@@ -14,8 +14,8 @@ router.get("/realtimeproducts", checkUserRole(['admin', 'premium']), viewsContro
 router.get("/chat", checkUserRole(['usuario','premium']) ,viewsController.renderChat);
 router.get("/", viewsController.renderHome);
 router.get("/reset-password", viewsController.renderResetPassword);
-router.get("/password", viewsController.renderCambioPassword);
+router.get("/passwordchange", viewsController.renderCambioPassword);
 router.get("/confirmacion-envio", viewsController.renderConfirmacion);
 
 module.exports = router;
- 
+    

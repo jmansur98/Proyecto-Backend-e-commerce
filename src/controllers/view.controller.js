@@ -98,7 +98,7 @@ class ViewsController {
     }
 
     async renderChat(req, res) {
-        res.render("chat");
+        res.render("chatcrew");
     }
 
     async renderHome(req, res) {
@@ -109,7 +109,7 @@ class ViewsController {
     }
 
     async renderCambioPassword(req, res) {
-        res.render("passwordcambio");
+        res.render("passwordchange");
     }
 
     async renderConfirmacion(req, res) {

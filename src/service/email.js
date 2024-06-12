@@ -11,7 +11,7 @@ class EmailManager {
             }
         });
     }
-   
+
     async enviarCorreoCompra(email, first_name, ticket) {
         try {
             const mailOptions = {
@@ -29,22 +29,22 @@ class EmailManager {
         } catch (error) {
             console.error('Error al enviar el correo electrónico:', error);
         }
-    }  
-   
-      async enviarCorreoRestablecimiento(email, first_name, token) {
+    }
+
+    async enviarCorreoRestablecimiento(email, first_name, token) {
         try {
             const mailOptions = {
                 from: 'ecommerceproyectbackend@gmail.com',
                 to: email,
-                subject: 'Restablecimiento de Contraseña',
+                subject: 'Restablecer Contraseña',
                 html: `
                     <h1>Restablecimiento de Contraseña</h1>
-                    <p>Hola ${first_name},</p>
+                    <p>Hola ${first_name},¿Comó estas? TANTO TIEMPOOOO!!!!!!!</p>
                     <p>Has solicitado restablecer tu contraseña. Utiliza el siguiente código para cambiar tu contraseña:</p>
                     <p><strong>${token}</strong></p>
                     <p>Este código expirará en 1 hora.</p>
                     <a href="http://localhost:8080/password">Restablecer Contraseña</a>
-                    <p>Si no solicitaste este restablecimiento, ignora este correo.</p>
+                    <p>En el caso de que no solicitaste este restablecimiento, ignora este correo.</p>
                 `
             };
 

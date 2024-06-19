@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Time Products</title>
 </head>
 <body>
@@ -20,39 +15,44 @@
         <section class="product-list" id="contenedorProductos">
         </section>
 
-        <section class="product-form">
-            <h2>Formulario para agregar productos</h2>
-            <form>
-                <div class="form-group">
-                    <input type="text" id="title" placeholder="Título">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="description" placeholder="Descripción">
-                </div>
-                <div class="form-group">
-                    <input type="number" id="price" placeholder="Precio">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="img" value="Imagen">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="code" placeholder="Código">
-                </div>
-                <div class="form-group">
-                    <input type="number" id="stock" placeholder="Stock">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="category" placeholder="Categoría">
-                </div>
-                <div class="form-group">
-                    <select id="status">
-                        <option value="true">Activo</option>
-                        <option value="false">Inactivo</option>
-                    </select>
-                </div>
-                <button type="button" id="btnEnviar">Enviar</button>
-            </form>
-        </section>
+<section class="product-form">
+    <h2>Formulario para agregar productos</h2>
+    {{#if user.role === 'admin'}}
+    <form>
+        <div class="form-group">
+            <input type="text" id="title" placeholder="Título">
+        </div>
+        <div class="form-group">
+            <input type="text" id="description" placeholder="Descripción">
+        </div>
+        <div class="form-group">
+            <input type="number" id="price" placeholder="Precio">
+        </div>
+        <div class="form-group">
+            <input type="text" id="img" value="Imagen">
+        </div>
+        <div class="form-group">
+            <input type="text" id="code" placeholder="Código">
+        </div>
+        <div class="form-group">
+            <input type="number" id="stock" placeholder="Stock">
+        </div>
+        <div class="form-group">
+            <input type="text" id="category" placeholder="Categoría">
+        </div>
+        <div class="form-group">
+            <select id="status">
+                <option value="true">Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+        </div>
+        <button type="button" id="btnEnviar">Enviar</button>
+    </form>
+    {{else}}
+    <p>No tienes permisos para agregar productos.</p>
+    {{/if}}
+</section>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

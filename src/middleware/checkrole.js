@@ -10,6 +10,7 @@ const checkUserRole = (allowedRoles) => (req, res, next) => {
             }
             const userRole = decoded.user.role;
             if (allowedRoles.includes(userRole)) {
+                req.user = decoded.user;
                 next();
             } else {
                 res.status(403).send('Acceso denegado. No tienes permiso para acceder a esta página.');

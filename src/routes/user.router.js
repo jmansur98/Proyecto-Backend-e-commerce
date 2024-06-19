@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const UserController = require("../controllers/user.controller.js");
+const upload = require("../middleware/multer.js")
 
 const userController = new UserController();
 
@@ -13,6 +14,8 @@ router.get("/admin", passport.authenticate("jwt", { session: false }), userContr
 router.post("/requestPasswordReset", userController.requestPasswordReset);
 router.post('/reset-password', userController.resetPassword);
 router.put("/premium/:uid", userController.cambiarRolPremium);
+router.post("/:uid/documents", upload.fields([{ name: "document" }, { name: "products" }, { name: "profile" }]), userController.uploadDocuments);
+
 
 
 

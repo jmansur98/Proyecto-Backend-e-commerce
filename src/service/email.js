@@ -20,7 +20,7 @@ class EmailManager {
                 subject: 'Confirmación de compra',
                 html: `
                     <h1>Confirmación de compra</h1>
-                    <p>Gracias por tu compra, ${first_name}!</p>
+                    <p>Gracias por tu gran compra, ${first_name}! ESPEREMOS QUE SIGA ASÍ.</p>
                     <p>El número de tu orden es: ${ticket}</p>
                 `
             };
@@ -56,4 +56,4 @@ class EmailManager {
     }
 }
 
-module.exports = EmailManager;   
+module.exports = EmailManager;      

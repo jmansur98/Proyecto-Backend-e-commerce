@@ -1,5 +1,5 @@
 const CartModel = require("../models/cart.model.js");
-const ProductModel = require("../models/product.model.js");
+const TicketModel = require("../models/ticket.model.js");
 
 class CartRepository {
     async crearCarrito() {
@@ -44,20 +44,21 @@ class CartRepository {
         } catch (error) {
             throw new Error("Error");
         }          
-    }
+    }   
+    
     async eliminarProducto(cartId, productId) {
         try {
             const cart = await CartModel.findById(cartId);
             if (!cart) {
                 throw new Error('Carrito no encontrado');
             }
-            cart.products = cart.products.filter(item => item.product.toString() !== productId);
+            cart.products = cart.products.filter(item => item.product._id.toString() !== productId);
             await cart.save();
             return cart;
         } catch (error) {
             throw new Error("Error");
         }
-    } 
+    }
 
     async actualizarProductosEnCarrito(cartId, updatedProducts) {
         try {
@@ -120,6 +121,20 @@ class CartRepository {
 
             return cart;
 
+        } catch (error) {
+            throw new Error("Error");
+        }
+    }
+    async agregarProductosATicket(products, purchaser) {
+        try {
+            const ticket = new TicketModel({
+                code: generateUniqueCode(),
+                purchase_datetime: new Date(),
+                amount: calcularTotal(products),
+                purchaser
+            });
+            await ticket.save();
+            return ticket;
         } catch (error) {
             throw new Error("Error");
         }

@@ -4,6 +4,8 @@ const CartController = require("../controllers/cart.controller.js");
 const authMiddleware = require("../middleware/authmiddleware.js");
 const cartController = new CartController();
 
+
+
 router.use(authMiddleware);
 
 router.post("/", cartController.nuevocarrito);

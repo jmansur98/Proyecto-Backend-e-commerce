@@ -4,19 +4,22 @@ const jwt = require("jsonwebtoken");
 const { createHash, isValidPassword } = require("../utils/hashbcryp.js");
 const UserDTO = require("../dto/user.dto.js");
 const { generarResetToken } = require("../utils/tokenrest.js");
-
+const UserRepository = require("../repositories/user.repository.js");
+const userRepository = new UserRepository();
 const EmailManager = require("../service/email.js");
 const emailManager = new EmailManager();
+
+
+
 
 class UserController {
     async register(req, res) {
         const { first_name, last_name, email, password, age } = req.body;
         try {
-            const existeUsuario = await UserModel.findOne({ email });
+            const existeUsuario = await userRepository.findOne(email);
             if (existeUsuario) {
                 return res.status(400).send("El usuario ya existe");
-            }
-
+            }   
 
             const nuevoCarrito = new CartModel();
             await nuevoCarrito.save();
@@ -51,7 +54,7 @@ class UserController {
     async login(req, res) {
         const { email, password } = req.body;
         try {
-            const usuarioEncontrado = await UserModel.findOne({ email });
+            const usuarioEncontrado = await userRepository.findOne(email);
 
             if (!usuarioEncontrado) {
                 return res.status(401).send("Usuario no válido");
@@ -66,6 +69,9 @@ class UserController {
                 expiresIn: "1h"
             });
 
+            usuarioEncontrado.last_connection = new Date();
+            await usuarioEncontrado.save();
+
             res.cookie("CookieProyectTest", token, {
                 maxAge: 3600000,
                 httpOnly: true
@@ -77,7 +83,6 @@ class UserController {
             res.status(500).send("Error interno del servidor");
         }
     }
-
 
     async profile(req, res) {
         try {
@@ -91,9 +96,17 @@ class UserController {
         }
     }
 
-
-
     async logout(req, res) {
+        if (req.user) {
+            try {
+                req.user.last_connection = new Date();
+                await req.user.save();
+            } catch (error) {
+                console.error(error);
+                res.status(500).send("Error interno del servidor");
+                return;
+            }
+        }
         res.clearCookie("CookieProyectTest");
         res.redirect("/login");
     }
@@ -109,7 +122,7 @@ class UserController {
         const { email } = req.body;
 
         try {
-            const user = await UserModel.findOne({ email });
+            const user = await userRepository.findOne(email);
             if (!user) {
                 return res.status(404).send("Este usuario no se encuentra en la base de datos.");
             }
@@ -135,7 +148,7 @@ class UserController {
         const { email, password, token } = req.body;
 
         try {
-            const user = await UserModel.findOne({ email });
+            const user = await userRepository.findOne(email);
             if (!user) {
                 return res.render("passwordcambio", { error: "Usuario no encontrado" });
             }
@@ -166,22 +179,70 @@ class UserController {
     }
 
     async cambiarRolPremium(req, res) {
+        const { uid } = req.params;
         try {
-            const { uid } = req.params;
-
-            const user = await UserModel.findById(uid);
-
+            const user = await userRepository.findById(uid);
             if (!user) {
-                return res.status(404).json({ message: 'Usuario no encontrado' });
+                return res.status(404).send("Usuario no encontrado");
             }
 
-            const nuevoRol = user.role === 'usuario' ? 'premium' : 'usuario';
+            const documentacionRequerida = ["Identificacion", "Comprobante de domicilio", "Comprobante de estado de cuenta"];
+            const userDocuments = user.documents.map(doc => doc.name);
+            const tieneDocumentacion = documentacionRequerida.every(doc => userDocuments.includes(doc));
 
-            const actualizado = await UserModel.findByIdAndUpdate(uid, { role: nuevoRol }, { new: true });
-            res.json(actualizado);
+            if (!tieneDocumentacion) {
+                return res.status(400).send("El usuario tiene que completar toda la documentacion requerida.");
+            }
+
+            const nuevoRol = user.role === "usuario" ? "premium" : "usuario";
+            user.role = nuevoRol;
+            await userRepository.save(user);
+
+            res.send(nuevoRol);
+        } catch (error) {
+            res.status(500).send("Error del servidor.");
+        }
+    }
+
+    async uploadDocuments(req, res) {
+        const { uid } = req.params;
+        const uploadedDocuments = req.files;
+
+        try {
+            const user = await userRepository.findById(uid);
+            if (!user) {
+                return res.status(404).send("Usuario no encontrado");
+            }
+
+            if (uploadedDocuments) {
+                if (uploadedDocuments.document) {
+                    user.documents = user.documents.concat(uploadedDocuments.document.map(doc => ({
+                        name: doc.originalname,
+                        reference: doc.path
+                    })));
+                }
+
+                if (uploadedDocuments.products) {
+                    user.documents = user.documents.concat(uploadedDocuments.products.map(doc => ({
+                        name: doc.originalname,
+                        reference: doc.path
+                    })));
+                }
+
+                if (uploadedDocuments.profile) {
+                    user.documents = user.documents.concat(uploadedDocuments.profile.map(doc => ({
+                        name: doc.originalname,
+                        reference: doc.path
+                    })));
+                }
+            }
+
+            await user.save();
+
+            res.status(200).send("Documentos cargados exitosamente");
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Error interno del servidor' });
+            res.status(500).send("Error interno del servidor.");
         }
     }
 }

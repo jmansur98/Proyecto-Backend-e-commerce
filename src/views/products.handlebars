@@ -15,6 +15,13 @@
                 <p class="card-text">{{description}}</p>
                 <p class="card-text">Price: ${{price}}</p>
                 <form action="/api/carts/{{../cartId}}/product/{{id}}" method="POST">
+                  <div class="input-group mb-3">
+                        <button type="button" class="btn btn-outline-secondary"
+                            onclick="decreaseQuantity(this)">-</button>
+                        <input type="number" class="form-control" value="1" name="quantity" id="quantityInput" readonly>
+                        <button type="button" class="btn btn-outline-secondary"
+                            onclick="increaseQuantity(this)">+</button>
+                    </div>
                     <button class="btnMios" type="submit">Agregar al Carrito</button>
                 </form>
             </div>
@@ -33,3 +40,20 @@
         <p>Pagina {{currentPage}} de {{totalPages}} </p>
     </div>
 </div>
+<script>
+    function decreaseQuantity(button) {
+        let input = button.parentNode.querySelector('input[type=number]');
+        let currentValue = parseInt(input.value);
+        if (!isNaN(currentValue) && currentValue > 1) {
+            input.value = currentValue - 1;
+        }
+    }
+
+    function increaseQuantity(button) {
+        let input = button.parentNode.querySelector('input[type=number]');
+        let currentValue = parseInt(input.value);
+        if (!isNaN(currentValue)) {
+            input.value = currentValue + 1;
+        }
+    }
+</script>

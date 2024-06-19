@@ -60,25 +60,19 @@ class CartController {
     }
 
       
-
+    
     async eliminarProductoDeCarrito(req, res) {
         const cartId = req.params.cid;
         const productId = req.params.pid;
-    
         try {
-            const carrito = await cartRepository.eliminarProducto(cartId, productId);
+            const updatedCart = await cartRepository.eliminarProducto(cartId, productId);
             res.json({
-                status: "success",
-                message: "Producto eliminado exitosamente",
-                carrito
+                status: 'success',
+                message: 'Producto eliminado del carrito correctamente',
+                updatedCart,
             });
         } catch (error) {
-            console.error('Error al eliminar el producto del carrito:', error);
-            res.status(500).json({
-                status: "error",
-                message: "Error al eliminar el producto del carrito",
-                error: error.message
-            });
+            res.status(500).send("Error");
         }
     }
     

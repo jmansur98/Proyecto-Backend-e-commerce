@@ -79,6 +79,14 @@ class ViewsController {
             res.status(500).json({ error: "Error interno del servidor. es acaaaaaaaaaaaaaaaa" });
         }
     }
+    async renderPanelPremium(req, res) {
+        try {
+            res.render("panel-premium");
+        } catch (error) {
+            console.error("Error al renderizar panel premium", error);
+            res.status(500).json({ error: "Error interno del servidor" });
+        }
+    }
 
     async renderLogin(req, res) {    
         res.render("login");

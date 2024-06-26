@@ -5,7 +5,7 @@ const viewsController = new ViewsController();
 const checkUserRole = require("../middleware/checkrole.js");
 const passport = require("passport");
 
-
+ 
 
 router.get("/products", checkUserRole(['usuario', 'premium']), passport.authenticate('jwt', { session: false }), viewsController.renderProducts);
 router.get("/carts/:cid", viewsController.renderCart);

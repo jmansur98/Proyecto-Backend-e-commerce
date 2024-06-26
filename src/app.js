@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 //Passport 
-app.use(passport.initialize());
+app.use(passport.initialize());   
 initializePassport();
 app.use(cookieParser());
 
@@ -30,13 +30,13 @@ const authMiddleware = require("./middleware/authmiddleware.js");
 app.use(authMiddleware);
 
 
-//Handlebars
+//Handlebars   
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
+   
 
-
-//Rutas: 
+//Rutas:    
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/users", userRouter);
@@ -49,4 +49,4 @@ const httpServer = app.listen(PUERTO, () => {
 
 ///Websockets: 
 const SocketManager = require("./sockets/socketmanager.js");
-new SocketManager(httpServer);
+new SocketManager(httpServer); 

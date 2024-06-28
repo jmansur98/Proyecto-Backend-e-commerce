@@ -1,4 +1,4 @@
-<body>
+
     <div class="container">
         <div class="profile-container">
             <h1>Mi Perfil</h1>
@@ -12,6 +12,7 @@
 
 	{{#if this.isAdmin}}
 	<a class="btnMios" href="/realtimeproducts">Modificar Productos</a>
+    <a class="btnMios" href="/api/users/admin">Administrar Usuarios</a>       
 	{{else}}
 	{{#if this.isPremium}}
 	<a class="btnMios" href="/panel-premium">Panel Premium</a>
@@ -22,4 +23,3 @@
 </div>
         </div>
     </div>
-</body>

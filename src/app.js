@@ -30,8 +30,22 @@ const authMiddleware = require("./middleware/authmiddleware.js");
 app.use(authMiddleware);
 
 
+   
+
 //Handlebars   
-app.engine("handlebars", exphbs.engine());
+const hbs = exphbs.create({
+    helpers: {
+        eq: function (v1, v2) {
+            return v1 === v2;
+        }
+    },
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+    }
+});
+
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
    

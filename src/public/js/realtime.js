@@ -4,9 +4,17 @@ const email = document.getElementById("email").textContent;
 
 socket.on("productos", (data) => {
     renderProductos(data);
-})
+});
 
-//Función para renderizar nuestros productos: 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const formSection = document.querySelector(".product-form");
+    if (role === "admin" || role === "premium") {
+        formSection.style.display = "block"; 
+    } else {
+        formSection.style.display = "none"; 
+    }
+});
 
 const renderProductos = (productos) => {
     const contenedorProductos = document.getElementById("contenedorProductos");
@@ -17,43 +25,41 @@ const renderProductos = (productos) => {
         card.classList.add("card");
 
         card.innerHTML = ` 
-                        <p> ${item.title} </p>
-                        <p> ${item.price} </p>
-                        <button> Eliminar </button>
-                        `;
+            <p>${item.title}</p>
+            <p>${item.price}</p>
+            <button>Eliminar</button>
+        `;
 
         contenedorProductos.appendChild(card);
         card.querySelector("button").addEventListener("click", () => {
-            if (role === "premium" && item.owner === email) {
-                eliminarProducto(item._id);
-            } else if (role === "admin") {
+            if ((role === "premium" && item.owner === email) || role === "admin") {
                 eliminarProducto(item._id);
             } else {
                 Swal.fire({
                     title: "Error",
-                    text: "No tenes permiso para borrar ese producto",
-                })
+                    text: "No tienes permiso para borrar este producto.",
+                });
             }
         });
-    })
-}
-
+    });
+};
 
 const eliminarProducto = (id) => {
     socket.emit("eliminarProducto", id);
-}
-
+};
 
 document.getElementById("btnEnviar").addEventListener("click", () => {
     agregarProducto();
-})
-
+});
 
 const agregarProducto = () => {
-    const role = document.getElementById("role").textContent;
-    const email = document.getElementById("email").textContent;
-
-    const owner = role === "premium" ? email : "admin";
+    if (role !== "admin" && role !== "premium") {
+        Swal.fire({
+            title: "Error",
+            text: "No tienes permiso para agregar productos.",
+        });
+        return;
+    }
 
     const producto = {
         title: document.getElementById("title").value,
@@ -64,8 +70,8 @@ const agregarProducto = () => {
         stock: document.getElementById("stock").value,
         category: document.getElementById("category").value,
         status: document.getElementById("status").value === "true",
-        owner
+        owner: role === "premium" ? email : "admin"
     };
 
     socket.emit("agregarProducto", producto);
-}
+};

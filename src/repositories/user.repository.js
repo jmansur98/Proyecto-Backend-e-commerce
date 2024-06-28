@@ -32,6 +32,15 @@ class UserRepository {
             throw error;
         }
     }
+    async findAll() {
+        try {
+            return await UserModel.find(); 
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    
 }
 
 module.exports = UserRepository;

@@ -65,7 +65,7 @@ class ViewsController {
 
                 
                 totalCompra += totalPrice;
-
+   
                 return {
                     product: { ...product, totalPrice },
                     quantity,
@@ -95,15 +95,20 @@ class ViewsController {
     async renderRegister(req, res) {
         res.render("register");
     }
-
     async renderRealTimeProducts(req, res) {
         try {
-            res.render("realtimeproducts");
+            res.render('realtimeproducts', {
+                role: req.user.role,
+                email: req.user.email,
+                isAdmin: req.user.role === 'admin' || req.user.role === 'premium'
+            });
         } catch (error) {
             console.log("error en la vista real time", error);
             res.status(500).json({ error: "Error interno del servidor" });
         }
     }
+    
+    
 
     async renderChat(req, res) {
         res.render("chatcrew");

@@ -10,8 +10,6 @@ const EmailManager = require("../service/email.js");
 const emailManager = new EmailManager();
 
 
-
-
 class UserController {
     async register(req, res) {
         const { first_name, last_name, email, password, age } = req.body;
@@ -65,10 +63,9 @@ class UserController {
                 return res.status(401).send("Contraseña incorrecta");
             }
 
-            const token = jwt.sign({ user: usuarioEncontrado }, "tokenProyect", {
+            const token = jwt.sign({ user: { ...usuarioEncontrado.toObject(), role: usuarioEncontrado.role, email: usuarioEncontrado.email } }, "tokenProyect", {
                 expiresIn: "1h"
             });
-
             usuarioEncontrado.last_connection = new Date();
             await usuarioEncontrado.save();
 
@@ -245,6 +242,74 @@ class UserController {
             res.status(500).send("Error interno del servidor.");
         }
     }
+
+    
+    async getAdminPage(req, res) {
+        try {
+            const users = await UserModel.find({}, 'first_name last_name email role').lean();
+            res.render("admin", { users: users });
+        } catch (error) {
+            console.error("Error al obtener usuarios:", error);
+            res.status(500).send("Error interno del servidor");
+        }    
+    }
+
+    
+     // Obtener todos los usuarios
+     async getAllUsers(req, res) {
+        try {
+            const users = await UserModel.find({}, 'first_name last_name email role');
+            res.status(200).json(users);
+        } catch (error) {
+            console.error("Error al obtener usuarios", error);
+            res.status(500).json({ error: "Error interno del servidor" });
+        }
+    }
+
+    // Actualizar rol de usuario
+    async updateUserRole(req, res) {
+        console.log('Recibida solicitud para actualizar rol');
+        console.log('Usuario ID:', req.params.userId);
+        console.log('Nuevo rol:', req.body.role);
+        const { userId } = req.params;
+        const { role } = req.body;
+    
+        try {
+            if (!['usuario', 'premium', 'admin'].includes(role)) {
+                return res.status(400).json({ error: "Rol no válido" });
+            }
+    
+            const user = await UserModel.findByIdAndUpdate(userId, { role }, { new: true });
+    
+            if (!user) {
+                return res.status(404).json({ error: "Usuario no encontrado" });
+            }
+    
+            res.status(200).json({ message: "Rol actualizado con éxito", user });
+        } catch (error) {
+            console.error("Error al actualizar rol de usuario", error);
+            res.status(500).json({ error: "Error interno del servidor" });
+        }
+    }
+
+    // Eliminar usuario
+    async deleteUser(req, res) {
+        const { userId } = req.params;
+
+        try {
+            const user = await UserModel.findByIdAndDelete(userId);
+
+            if (!user) {
+                return res.status(404).json({ error: "Usuario no encontrado" });
+            }
+
+            res.status(200).json({ message: "Usuario eliminado con éxito" });
+        } catch (error) {
+            console.error("Error al eliminar usuario", error);
+            res.status(500).json({ error: "Error interno del servidor" });
+        }
+    }
 }
+    
 
 module.exports = UserController;

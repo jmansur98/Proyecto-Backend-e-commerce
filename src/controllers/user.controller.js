@@ -17,7 +17,7 @@ class UserController {
             const existeUsuario = await userRepository.findOne(email);
             if (existeUsuario) {
                 return res.status(400).send("El usuario ya existe");
-            }   
+            }
 
             const nuevoCarrito = new CartModel();
             await nuevoCarrito.save();
@@ -243,7 +243,8 @@ class UserController {
         }
     }
 
-    
+
+    // obtener página de administración
     async getAdminPage(req, res) {
         try {
             const users = await UserModel.find({}, 'first_name last_name email role').lean();
@@ -251,12 +252,12 @@ class UserController {
         } catch (error) {
             console.error("Error al obtener usuarios:", error);
             res.status(500).send("Error interno del servidor");
-        }    
+        }
     }
 
-    
-     // Obtener todos los usuarios
-     async getAllUsers(req, res) {
+
+    // Obtener todos los usuarios
+    async getAllUsers(req, res) {
         try {
             const users = await UserModel.find({}, 'first_name last_name email role');
             res.status(200).json(users);
@@ -268,23 +269,20 @@ class UserController {
 
     // Actualizar rol de usuario
     async updateUserRole(req, res) {
-        console.log('Recibida solicitud para actualizar rol');
-        console.log('Usuario ID:', req.params.userId);
-        console.log('Nuevo rol:', req.body.role);
         const { userId } = req.params;
         const { role } = req.body;
-    
+
         try {
             if (!['usuario', 'premium', 'admin'].includes(role)) {
                 return res.status(400).json({ error: "Rol no válido" });
             }
-    
+
             const user = await UserModel.findByIdAndUpdate(userId, { role }, { new: true });
-    
+
             if (!user) {
                 return res.status(404).json({ error: "Usuario no encontrado" });
             }
-    
+
             res.status(200).json({ message: "Rol actualizado con éxito", user });
         } catch (error) {
             console.error("Error al actualizar rol de usuario", error);
@@ -309,7 +307,33 @@ class UserController {
             res.status(500).json({ error: "Error interno del servidor" });
         }
     }
+
+    // Eliminar usuarios inactivos
+    async deleteInactiveUsers(req, res) {
+        try {
+            const inactivePeriod = 5 * 60 * 1000; // 5 minutos en milisegundos
+            const cutoffDate = new Date(Date.now() - inactivePeriod);
+
+            console.log("Buscando usuarios inactivos antes de:", cutoffDate);
+
+            const inactiveUsers = await userRepository.findInactiveUsers(cutoffDate);
+
+            console.log("Usuarios inactivos encontrados:", inactiveUsers);
+
+            for (const user of inactiveUsers) {
+                await emailManager.sendInactivityEmail(user.email, user.first_name);
+                await UserModel.deleteOne({ _id: user._id });
+                console.log(`Usuario ${user.email} eliminado por inactividad.`);
+            }
+
+            res.status(200).json({ message: "Usuarios inactivos eliminados y notificados con éxito" });
+        } catch (error) {
+            console.error("Error al eliminar usuarios inactivos:", error);
+            res.status(500).json({ error: "Error interno del servidor" });
+        }
+    }
+
 }
-    
+
 
 module.exports = UserController;

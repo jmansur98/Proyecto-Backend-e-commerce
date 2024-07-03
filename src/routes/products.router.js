@@ -10,4 +10,4 @@ router.post("/", passport.authenticate("jwt", { session: false }) ,productContro
 router.put("/:pid", productController.updateProduct);
 router.delete("/:pid", productController.deleteProduct);
 
-module.exports = router;
+module.exports = router;                        

@@ -54,6 +54,22 @@ class EmailManager {
             throw new Error("Error al enviar correo electrónico");
         }
     }
+
+    async sendInactivityEmail(email, firstName) {
+        try {       
+            const mailOptions = {
+                from: "ecommerceproyectbackend@gmail.com",
+                to: email,
+                subject: "NO DEJES QUE TE SUCEDA LA PEOR POR TUS ACCIONES IRRESPONSABLES. Tu cuenta ha sido eliminada por inactividad lastimosamente!!!!!!!!",
+                text: `Hola querid@ ${firstName},\n\nTu cuenta ha sido eliminada debido a la inactividad. No te precupes, puedes regitrarte nuevamente en nuestro sitio web oficial, cuando quieras, desde donde quieras.\n\nSaludos,\nEquipo de E-commerce Mixer`
+            };
+
+            await this.transporter.sendMail(mailOptions);
+            console.log(`Correo de inactividad enviado a ${email}`);
+        } catch (error) {
+            console.error('Error al enviar el correo electrónico:', error);
+        }
+    }
 }
 
-module.exports = EmailManager;      
+module.exports = EmailManager;

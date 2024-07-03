@@ -1,30 +1,32 @@
 body {
     font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 /* HEADER */
 .tamLogo {
-    width: 300px;
+    width: 150px;
 }
 
 .fuentesNav {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding: 10px;
 }
 
 .encabezado {
     border-top: solid 20px #f9af23;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 nav li a {
     text-transform: uppercase;
     text-decoration: none;
-    margin: 15px;
+    margin: 10px;
     color: gray;
     border-left: 1px solid #0808087c;
     border-right: 1px solid #0808087c;
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 a:hover {
@@ -32,141 +34,90 @@ a:hover {
     color: #fafafa;
 }
 
-/* PRODUCTOS */
+/* CAROUSEL */
+#carouselExample {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+#carouselExample .carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Home */
 .tituloProductos {
     background-color: #f9af23;
+    font-size: 25px;
     color: #fafafa;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 20px;
+    padding: 15px;
 }
 
-.tituloProductos h2 {
-    font-size: 35px;
+/* BUTTONS */
+.colorBtn,
+.btnMios,
+#btnEnviar {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    font-size: 1em;
+    padding: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+    text-decoration: none; 
+    width: 100%;
 }
 
-/* CARDS */
+.colorBtn:hover,
+.btnMios:hover,
+#btnEnviar:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
 .colorBtn {
     background-color: #f9af23;
     color: #fafafa;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .colorBtn:hover {
-    background-color: f9af23;
-    color: #fafafa;
+    background-color: #e89f20;
 }
 
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
-    object-position: center top;
-}
-
-/* Estilos del formulario de inicio de sesión */
-h1 {
-    text-align: center;
-}
-
-.formulario {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #333;
-}
-
-.inputTest {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* profile */
-body {
-    background-color: #f8f9fa;
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#carouselExample {
-    width: 800px;
-    height: 400px;
-    margin: 0 auto;
-    bottom: 120px;
-}
-
-#carouselExample .carousel-item img {
-    transition: transform 0.7s ease-in-out;
-}
-
-#carouselExample .carousel-item:hover img {
-    transform: scale(1.1);
-}
-
+/* Profile */
 .profile-container {
     text-align: center;
+    padding: 80px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    animation: fadeInUp 1s ease-out;
 }
 
-h1 {
+.profile-container h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
     animation: fadeInDown 1s ease-out;
 }
 
 .profile-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    max-width: 400px;
-    margin: auto;
-    animation: fadeInUp 1s ease-out;
+    padding: 20px;
 }
 
 .profile-card p {
     font-size: 1.2em;
-    margin: 10px 0;
-}
-
-.btn {
-    margin: 10px 5px;
-    padding: 10px 20px;
-    font-size: 1em;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.btn:hover {
-    background-color: #f9af23;
-    transform: scale(1.05);
-}
-
-.btn-logout {
-    background-color: #6c757d;
-    color: #fff;
-}
-
-.btn-logout:hover {
-    background-color: #f9af23;
-    transform: scale(1.05);
+    margin: 20px 0;
 }
 
 /* Animations */
@@ -192,17 +143,132 @@ h1 {
     }
 }
 
-i {
-    font-size: 35px;
+/* Login Form */
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-out;
 }
 
-/* Real Time Products Section */
-.header {
+.formulario {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.inputTest {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+form p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+form p a:hover {
+    text-decoration: underline;
+}
+
+/* Cart */
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.cart-header {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-out;
+}
+
+.cart-card {
+    margin-bottom: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.cart-card:hover {
+    transform: scale(1.02);
+}
+
+.cart-card .card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.cart-card .card-text {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.cart-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.cart-buttons .btn {
+    flex: 1;
+    margin: 5px;
+}
+
+.cart-total {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* RealTimeProducts */
+.container,
+.admin-users-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.header,
+.admin-users-header {
     text-align: center;
     margin-bottom: 20px;
+    animation: fadeInDown 1s ease-out;
 }
 
-.header h1 {
+.header h1,
+.admin-users-header h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
 }
@@ -223,7 +289,25 @@ i {
 }
 
 .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     margin-bottom: 30px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px;
+    width: calc(33% - 30px);
+    transition: transform 0.3s;
+    animation: fadeInUp 1s ease-out;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
 }
 
 .product-form {
@@ -231,14 +315,15 @@ i {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
+    animation: fadeInUp 1s ease-out;
 }
 
 .product-form h2 {
+    text-align: center;
     font-size: 1.5em;
     margin-bottom: 20px;
-    text-align: center;
 }
 
 .form-group {
@@ -255,19 +340,125 @@ i {
     font-size: 1em;
 }
 
-#btnEnviar {
-    display: block;
+/* Admin Users */
+.admin-users-table {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    border-collapse: collapse;
+    margin-bottom: 30px;
 }
 
-#btnEnviar:hover {
+.admin-users-table th,
+.admin-users-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.admin-users-table th {
+    background-color: #f9af23;
+    color: white;
+    font-weight: bold;
+}
+
+.admin-users-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.admin-users-table tr:hover {
+    background-color: #ddd;
+}
+
+.update-role-form,
+.delete-user-form {
+    display: inline-block;
+    margin: 0;
+}
+
+.update-role-form select,
+.update-role-form button,
+.delete-user-form button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.update-role-form select {
+    border: 1px solid #ddd;
+}
+
+.update-role-form button {
+    background-color: #007bff;
+    color: white;
+}
+
+.update-role-form button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.delete-user-form button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-user-form button:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .admin-users-table, .admin-users-table thead, .admin-users-table tbody, .admin-users-table th, .admin-users-table td, .admin-users-table tr {
+        display: block;
+    }
+
+    .admin-users-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .admin-users-table tr {
+        margin: 0 0 1rem 0;
+    }
+
+    .admin-users-table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    .admin-users-table td:before {
+        position: absolute;
+        top: 0;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .admin-users-table td:nth-of-type(1):before { content: "ID"; }
+    .admin-users-table td:nth-of-type(2):before { content: "Nombre"; }
+    .admin-users-table td:nth-of-type(3):before { content: "Email"; }
+    .admin-users-table td:nth-of-type(4):before { content: "Rol"; }
+    .admin-users-table td:nth-of-type(5):before { content: "Acciones"; }
+    
+    .update-role-form,
+    .delete-user-form {
+        display: block;
+        text-align: right;
+    }
+
+    .update-role-form select,
+    .update-role-form button,
+    .delete-user-form button {
+        width: 100%;
+        margin: 5px 0;
+    }
 }

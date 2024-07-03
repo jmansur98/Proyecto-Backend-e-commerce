@@ -10,7 +10,6 @@ const initializePassport = () => {
         secretOrKey: "tokenProyect"
     }, async (jwt_payload, done) => {        
         try { 
-           
             const user = await UserModel.findById(jwt_payload.user._id);
             if (!user) {
                 return done(null, false);
@@ -21,13 +20,11 @@ const initializePassport = () => {
         }  
     }));
 }
+
 const cookieExtractor = (req) => {
     let token = null;
-    if (req && req.cookies) {
-        token = req.cookies["CookieProyectTest"];
-    }  
-    //console.log("Extracted token: ", token);  
+    if (req && req.cookies) {token = req.cookies["CookieProyectTest"];}  
     return token;
 }
 
-module.exports = initializePassport;   
+module.exports = initializePassport;

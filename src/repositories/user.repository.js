@@ -32,6 +32,7 @@ class UserRepository {
             throw error;
         }
     }
+
     async findAll() {
         try {
             return await UserModel.find(); 
@@ -40,7 +41,12 @@ class UserRepository {
         }
     }
 
-    
+    async findInactiveUsers(cutoffDate) {
+        return await UserModel.find({ 
+            last_connection: { $lt: cutoffDate },
+            role: { $in: ['usuario', 'premium'] }
+        });
+    }
 }
 
 module.exports = UserRepository;

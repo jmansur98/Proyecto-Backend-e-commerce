@@ -4,7 +4,7 @@ const checkUserRole = (allowedRoles) => (req, res, next) => {
     const token = req.cookies.CookieProyectTest;
 
     if (token) {
-        jwt.verify(token, 'tokenProyect', (err, decoded) => {
+        jwt.verify(token, process.env.JWT_SECRET || 'tokenProyect', (err, decoded) => {
             if (err) {
                 return res.status(403).send('Acceso denegado. Token inválido.');
             }

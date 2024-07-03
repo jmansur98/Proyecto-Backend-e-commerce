@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const UserController = require("../controllers/user.controller.js");
-const upload = require("../middleware/multer.js")
-const checkUserRole = require("../middleware/checkrole.js")
+const upload = require("../middleware/multer.js");
+const checkUserRole = require("../middleware/checkrole.js");
 
 const userController = new UserController();
 
@@ -18,10 +18,11 @@ router.post("/:uid/documents", upload.fields([{ name: "document" }, { name: "pro
 
 // Nuevas rutas
 router.get('/admin', passport.authenticate('jwt', { session: false }), checkUserRole(['admin']), userController.getAdminPage);
-router.get('/users/admin', passport.authenticate('jwt', { session: false }), checkUserRole(['admin']), userController.getAllUsers);
+router.get('/', passport.authenticate('jwt', { session: false }), checkUserRole(['admin']), userController.getAllUsers);
 router.put('/:userId/role', passport.authenticate('jwt', { session: false }), checkUserRole(['admin']), userController.updateUserRole);
 router.delete('/:userId', passport.authenticate('jwt', { session: false }), checkUserRole(['admin']), userController.deleteUser);
 
-
+// Nueva ruta para eliminar usuarios inactivos
+router.delete('/', passport.authenticate('jwt', { session: false }), checkUserRole(['admin']), userController.deleteInactiveUsers.bind(userController));
 
 module.exports = router;

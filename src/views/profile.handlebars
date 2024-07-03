@@ -3,8 +3,10 @@
         <div class="profile-container">
             <h1>Mi Perfil</h1>
            <div class="profile-card">
-	<p>Bienvenido, {{user.nombre}} {{user.apellido}}!</p>
-	<p>Rol: {{user.role}}</p>
+	<p>BIENVENID@</p>
+		{{user.nombre}} {{user.apellido}}
+	<p>TU ROL ES: </p>
+	{{user.role}}
 
 	<form action="/api/users/logout" method="POST">
 		<button class="btnMios" type="submit">Logout</button>

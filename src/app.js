@@ -6,7 +6,7 @@ const passport = require("passport");
 const initializePassport = require("./config/passport.config.js");
 const cors = require("cors");
 const path = require('path');
-const PUERTO = 8080;
+const PUERTO = process.env.PORT || 8080;
 require("./database.js");
 
 const productsRouter = require("./routes/products.router.js");

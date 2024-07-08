@@ -39,11 +39,11 @@ class EmailManager {
                 subject: 'Restablecer Contraseña',
                 html: `
                     <h1>Restablecimiento de Contraseña</h1>
-                    <p>Hola ${first_name},¿Comó estas? TANTO TIEMPOOOO!!!!!!!</p>
+                    <p>Hola ${first_name},¿Comó estas?¿Problema para ingresar? NO TE PREOCUPES, ESTO SERA RAPIDO....</p>
                     <p>Has solicitado restablecer tu contraseña. Utiliza el siguiente código para cambiar tu contraseña:</p>
                     <p><strong>${token}</strong></p>
                     <p>Este código expirará en 1 hora.</p>
-                    <a href="http://localhost:8080/password">Restablecer Contraseña</a>
+                    <a href="http://localhost:8080/passwordchange">Restablecer Contraseña</a>
                     <p>En el caso de que no solicitaste este restablecimiento, ignora este correo.</p>
                 `
             };

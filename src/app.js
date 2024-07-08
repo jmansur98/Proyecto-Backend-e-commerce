@@ -6,9 +6,8 @@ const passport = require("passport");
 const initializePassport = require("./config/passport.config.js");
 const cors = require("cors");
 const path = require('path');
-require('dotenv').config();  // Cargar variables de entorno
-require('./database');  // Importar configuración de la base de datos
-
+require('dotenv').config();
+require('./database');  
 const PUERTO = process.env.PORT || 8080;
 
 // Importación de rutas

@@ -52,7 +52,7 @@ class UserController {
     async login(req, res) {
         const { email, password } = req.body;
         try {
-            const usuarioEncontrado = await UserModel.findOne({ email }).exec();
+            const usuarioEncontrado = await userRepository.findOne(email);
 
             if (!usuarioEncontrado) {
                 return res.status(401).send("Usuario no válido");
@@ -63,10 +63,9 @@ class UserController {
                 return res.status(401).send("Contraseña incorrecta");
             }
 
-            const token = jwt.sign({ user: usuarioEncontrado._id }, process.env.JWT_SECRET, {
+            const token = jwt.sign({ user: { ...usuarioEncontrado.toObject(), role: usuarioEncontrado.role, email: usuarioEncontrado.email } }, "tokenProyect", {
                 expiresIn: "1h"
             });
-
             usuarioEncontrado.last_connection = new Date();
             await usuarioEncontrado.save();
 
@@ -77,11 +76,10 @@ class UserController {
 
             res.redirect("/api/users/profile");
         } catch (error) {
-            console.error("Error en el inicio de sesión", error);
+            console.error(error);
             res.status(500).send("Error interno del servidor");
         }
     }
-
 
     async profile(req, res) {
         try {

@@ -6,20 +6,10 @@ const passport = require("passport");
 const initializePassport = require("./config/passport.config.js");
 const cors = require("cors");
 const path = require('path');
-const mongoose = require('mongoose');
-const PUERTO = process.env.PORT || 8080;
-const dbURL = process.env.DATABASE_URL;
+require('dotenv').config();  // Cargar variables de entorno
+require('./database');  // Importar configuración de la base de datos
 
-// Conexión a la base de datos
-mongoose.connect(dbURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('Conectado a la base de datos'))
-.catch((err) => {
-    console.error('Error al conectarse a la base de datos', err);
-    process.exit(1);
-});
+const PUERTO = process.env.PORT || 8080;
 
 // Importación de rutas
 const productsRouter = require("./routes/products.router.js");

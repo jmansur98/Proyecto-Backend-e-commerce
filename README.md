@@ -304,10 +304,10 @@ Para ejecutar el proyecto, siga estos pasos:
 
 ```bash
 # Clonar el repositorio
-git clone <url-del-repositorio>
+git clone https://github.com/jmansur98/Proyecto-Backend-e-commerce.git
 
 # Ir al directorio del proyecto
-cd <nombre-del-proyecto>
+cd Proyecto Backend e-commerce
 
 # Instalar las dependencias
 npm install
